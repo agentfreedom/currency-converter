@@ -17,3 +17,30 @@ currencies.forEach((currency) => {
   option.text = currency;
   toDropDown.add(option);
 });
+
+fromDropDown.value = 'USD';
+toDropDown.value = 'UAH';
+
+let convertCurrency = () => {
+  const amount = document.querySelector('#amount').value;
+  let fromCurrency = fromDropDown.value;
+  let toCurrency = toDropDown.value;
+
+  if (amount.length !== 0) {
+    console.log('ok');
+    // alert('ok');
+    fetch(api).then((response) => response.json()).then((data) => {
+      // console.log(data.conversion_rates[fromCurrency]);
+      let fromExchangeRate = data.conversion_rates[fromCurrency];
+      let toExchangeRate = data.conversion_rates[toCurrency];
+      const convertedAmount = (amount / fromExchangeRate) * toExchangeRate;
+      result.innerHTML = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`
+    });
+  } else {
+    // alert('Please fill in the amount');
+    console.log('Please fill in the amount');
+  }
+};
+
+document.querySelector('#convert-bnt').addEventListener('click', convertCurrency);
+window.addEventListener('load', convertCurrency);
