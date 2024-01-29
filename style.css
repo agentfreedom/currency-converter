@@ -88,7 +88,8 @@ select {
   transition: all .7s;
 }
 select:focus {
-  background-image: url("./img/arrow-up.svg");: all .7s;  
+  background-image: url("./img/arrow-up.svg");
+  transition: all .7s;
 }
 select option {
   background-color: #fff;
